@@ -2,7 +2,7 @@
 
 namespace JuhaKurisu.PopoTools.Commons;
 
-public static class PopoReflectionCommons
+public partial class PopoReflectionCommons
 {
     public static IEnumerable<Type> GetInterfaces<T>(params Assembly[] assemblies)
     {

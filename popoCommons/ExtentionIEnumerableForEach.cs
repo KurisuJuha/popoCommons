@@ -4,12 +4,8 @@ namespace JuhaKurisu.PopoTools.Commons;
 
 public static class ExtentionIEnumerableForEach
 {
-    public static IEnumerable<T> ForEach<T>(this IEnumerable<T> self, Action<T> value)
+    public static void ForEach<T>(this IEnumerable<T> self, Action<T> value)
     {
-        foreach (var element in self)
-        {
-            value.Invoke(element);
-            yield return element;
-        }
+        foreach (var element in self) value.Invoke(element);
     }
 }

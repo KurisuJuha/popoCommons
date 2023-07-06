@@ -12,18 +12,15 @@ public partial class PopoReflectionCommons
 
     public static IEnumerable<Type> GetInterfaces<T>()
     {
-        return AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => GetInterfaces<T>(assembly));
+        return GetInterfaces<T>(AppDomain.CurrentDomain.GetAssemblies());
     }
 
-    public static IEnumerable<T> CreateInterfaceInstances<T>(params Assembly[] assemblies) where T : class
+    public static IEnumerable<T> CreateInterfaceInstances<T>(params Assembly[] assemblies)
     {
-        return GetInterfaces<T>(assemblies)
-            .Where(c => !c.IsAbstract)
-            .Select(c => Activator.CreateInstance(c) as T)
-            .NotNull();
+        return GetInterfaces<T>(assemblies).CreateInstances<T>();
     }
 
-    public static IEnumerable<T> CreateInterfaceInstances<T>() where T : class
+    public static IEnumerable<T> CreateInterfaceInstances<T>()
     {
         return CreateInterfaceInstances<T>(AppDomain.CurrentDomain.GetAssemblies());
     }
